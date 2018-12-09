@@ -1,0 +1,18 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use App\Models\Order;
+
+class OrdersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $orders = factory(Order::class)->times(100)->make();
+        Order::insert($orders->toArray());
+    }
+}

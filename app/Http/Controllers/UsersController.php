@@ -26,7 +26,8 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $orders = $user->order_history()->paginate(10);
+        return view('users.show', compact('user', 'orders'));
     }
 
     public function store(Request $request)

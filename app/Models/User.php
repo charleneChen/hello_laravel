@@ -32,4 +32,14 @@ class User extends Authenticatable
         $hash = md5(strtolower(trim($this->attributes['email'])));
         return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function order_history()
+    {
+        return $this->orders()->orderBy('created_at', 'desc');
+    }
 }

@@ -8522,6 +8522,57 @@ input {
   right: 0;
 }
 
+/* orders */
+
+.orders {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.orders li {
+  padding: 10px 0;
+  border-top: 1px solid #e8e8e8;
+  position: relative;
+}
+
+.orders .user {
+  margin-top: 5em;
+  padding-top: 0;
+}
+
+.orders .content {
+  display: block;
+  margin-left: 60px;
+  word-break: break-word;
+}
+
+.orders .content img {
+  display: block;
+  padding: 5px 0;
+}
+
+.orders .timestamp {
+  color: #777777;
+  display: block;
+  margin-left: 60px;
+}
+
+.orders .gravatar {
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.orders form button.order-delete-btn {
+  position: absolute;
+  right: 0;
+  top: 10px;
+}
+
+.order_form {
+  margin-top: 20px;
+}
+
 /* footer */
 
 footer {
