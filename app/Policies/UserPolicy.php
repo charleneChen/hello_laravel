@@ -28,4 +28,9 @@ class UserPolicy
     {
         return $currentUser->is_admin && $currentUser->id !== $user->id;
     }
+
+    public function show_admin(User $currentUser, User $user)
+    {
+        return $currentUser->is_admin;
+    }
 }

@@ -5,7 +5,9 @@
           <nav>
             <ul class="nav navbar-nav navbar-right">
                 @if (Auth::check())
-                    <li><a href="{{ route('users.index') }}">用户列表</a></li>
+                    @can('show_admin', Auth::user())
+                        <li><a href="{{ route('users.index') }}">用户列表</a></li>
+                    @endcan
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         {{ Auth::user()->name }} <b class="caret"></b>

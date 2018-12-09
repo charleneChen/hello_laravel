@@ -75,8 +75,9 @@ class UsersController extends Controller
 
     }
 
-    public function index()
+    public function index(User $currentUser)
     {
+        $this->authorize('show_admin', $currentUser);
         $users = User::paginate(10);
         return view('users.index', compact('users'));
     }
