@@ -8421,47 +8421,6 @@ p {
   color: #fff;
 }
 
-/* footer */
-
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
-}
-
-footer a {
-  color: #555;
-}
-
-footer a:hover {
-  color: #222;
-}
-
-footer small {
-  float: left;
-}
-
-footer ul {
-  float: right;
-  list-style: none;
-}
-
-footer ul li {
-  float: left;
-  margin-left: 15px;
-}
-
-footer img.brand-icon {
-  width: 17px;
-  height: 17px;
-}
-
-footer .slogon {
-  font-size: 13px;
-  font-weight: bold;
-}
-
 /* sidebar */
 
 aside section {
@@ -8521,5 +8480,54 @@ input {
 
 .panel {
   margin-top: 50px;
+}
+
+#logout {
+  cursor: default;
+}
+
+#logout:hover {
+  background-color: transparent;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #777;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 15px;
+}
+
+footer img.brand-icon {
+  width: 17px;
+  height: 17px;
+}
+
+footer .slogon {
+  font-size: 13px;
+  font-weight: bold;
 }
 
