@@ -22,4 +22,9 @@ Route::get('login', 'SessionsController@create')->name('login');
 Route::post('login', 'SessionsController@store')->name('login');
 Route::delete('logout', 'SessionsController@destroy')->name('logout');
 
-Route::resource('orders', 'OrdersController', ['only' => ['create', 'store', 'destroy']]);
+//Route::resource('orders', 'OrdersController', ['only' => ['create', 'store', 'destroy']]);
+
+Route::get('parties/{party}/orders/create', 'OrdersController@create')->name('orders.create');
+Route::get('parties/{party}/orders', 'OrdersController@index')->name('orders.index');
+Route::post('parties/{party}/orders', 'OrdersController@store')->name('orders.store');
+Route::delete('parties/{party}/orders/{order}', 'OrdersController@destroy')->name('orders.destroy');

@@ -1,8 +1,8 @@
-<form action="{{ route('orders.store') }}" method="POST" class="form-horizontal">
+<form action="{{ route('orders.store', $party) }}" method="POST" class="form-horizontal">
     @include('shared._errors')
     {{ csrf_field() }}
     <input type="hidden" name="authorization" value="{{JWTAuth::fromUser(Auth::user())}}">
-    <input type="hidden" name="site_id" value="{{$site_id}}">
+    <input type="hidden" name="party_id" value="{{$party->id}}">
 
     <div class="form-group">
         <label class="col-md-3 control-label no-padding-l">推荐座位</label>

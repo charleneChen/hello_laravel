@@ -14,7 +14,7 @@
     </div>
     <aside class="col-md-4">
         <section class="order_form">
-            @include('shared._order_form', compact('ticket_limit'))
+            @include('shared._order_form', compact('ticket_limit', 'party'))
         </section>
         <p>广州体育场共有座位 {{$total_seats}} 个，当前剩余 {{$left_seats}} 个</p>
     </aside>

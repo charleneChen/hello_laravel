@@ -10,8 +10,8 @@ class SeatNumbersController extends Controller
     public function select(SeatNumberRequest $request)
     {
         $number = $request->number;
-        $site_id = $request->site_id;
-        $seats = \Redis::sRandMember('site_' . $site_id, $number);
+        $party_id = $request->party_id;
+        $seats = \Redis::srandmember('party_' . $party_id, $number);
 
         return $this->response->array($seats)->setStatusCode(200);
     }

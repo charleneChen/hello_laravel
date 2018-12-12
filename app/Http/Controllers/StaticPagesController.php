@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Party;
 
 class StaticPagesController extends Controller
 {
     public function home()
     {
-        return view('static_pages/home');
+        $party= Party::find(1);
+        return view('static_pages/home', compact('party'));
     }
 
     public function help()

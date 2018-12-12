@@ -12,7 +12,7 @@ class WriteSeats extends Command
      *
      * @var string
      */
-    protected $signature = 'seats:write {site_id}';
+    protected $signature = 'seats:write {party_id}';
 
     /**
      * The console command description.
@@ -47,7 +47,7 @@ class WriteSeats extends Command
         foreach ($seats as $seat) {
             $seat = (array) $seat;
             $data = $seat['block'] . '-' . $seat['row'] . '-' . $seat['col'];
-            \Redis::sadd('site_' . $site_id, $data);
+            \Redis::sadd('party_' . $site_id, $data);
         }
 
         $this->info('Success');

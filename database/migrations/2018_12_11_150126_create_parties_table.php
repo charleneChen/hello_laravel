@@ -15,7 +15,7 @@ class CreatePartiesTable extends Migration
     {
         Schema::create('parties', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('site_id')->comment('座位属于哪个场地，ref Site.id');
+            $table->integer('site_id')->comment('哪个场地，ref Site.id');
             $table->integer('available_seats')->comment('还剩多少个座位可用');
             $table->timestamps();
         });

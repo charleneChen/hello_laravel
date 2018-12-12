@@ -19,7 +19,6 @@ class CreateSeatsTable extends Migration
             $table->string('block')->comment('座位在哪个区域，例如A区');
             $table->integer('row')->comment('座位在第几行');
             $table->integer('col')->comment('座位在第几列');
-            $table->boolean('is_active')->comment('是否可用');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->comment('用户标识，ref User.id');
-            $table->integer('site_id')->comment('座位属于哪个场地，ref Site.id');
+            $table->integer('party_id')->comment('座位属于哪个场地，ref Party.id');
             $table->integer('num')->comment('订了多少张票');
             $table->string('seat')->comment('座位号');
             $table->timestamps();

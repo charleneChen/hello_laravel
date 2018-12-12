@@ -14,8 +14,10 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\Models\User::class, function (Faker $faker) {
-    $date_time = $faker->date . ' ' . $faker->time;
+    static $date_time;
     static $password;
+
+    $date_time ?: $date_time = date("Y-m-d H:i:s");
 
     return [
         'name' => $faker->name,

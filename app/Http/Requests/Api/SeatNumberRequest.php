@@ -28,7 +28,7 @@ class SeatNumberRequest extends FormRequest
                 'required',
                 'regex:/^[1-5]$/'
             ],
-            'site_id' => [
+            'party_id' => [
                 'required',
                 'regex:/^\d+$/'
             ]

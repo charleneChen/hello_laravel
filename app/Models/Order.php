@@ -13,7 +13,7 @@ class Order extends Model
      *
      * @var array
      */
-    protected $fillable = ['num', 'seat', 'site_id', 'user_id'];
+    protected $fillable = ['num', 'seat', 'party_id', 'user_id'];
 
     public function user()
     {
@@ -23,10 +23,5 @@ class Order extends Model
     public function party()
     {
         return $this->belongsTo(Party::class);
-    }
-
-    public function randomSelectSeat($number)
-    {
-
     }
 }

@@ -11,7 +11,6 @@ $factory->define(App\Models\Seat::class, function (Faker $faker) {
         'block' => 'A',
         'row' => 1,
         'col' => 1,
-        'is_active' => false,
         'created_at' => $date_time,
         'updated_at' => $date_time,
     ];

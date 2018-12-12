@@ -1014,7 +1014,7 @@ $(function () {
             type: 'GET',
             data: {
                 number: number,
-                site_id: 1
+                party_id: 1
             },
             beforeSend: function beforeSend(xhr) {
                 xhr.setRequestHeader("Authorization", "Bearer  " + authorization);
