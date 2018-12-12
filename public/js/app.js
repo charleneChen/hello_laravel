@@ -989,8 +989,56 @@ window.Vue = __webpack_require__(35);
 
 Vue.component('example-component', __webpack_require__(38));
 
-var app = new Vue({
-  el: '#app'
+// const app = new Vue({
+//     el: '#app'
+// });
+
+$(function () {
+    $('.ticket-number').on('click', function () {
+        var $has_ticket = $('.has-ticket'),
+            $no_ticket = $('.no-ticket'),
+            $confirm_button = $('#book-ticket');
+
+        $('.ticket-number').removeClass('active');
+        $(this).addClass('active');
+        var number = $(this).data('number');
+        $('#ticket-number-input').val(number);
+        $has_ticket.html('');
+
+        $confirm_button.attr('disabled', true);
+
+        var authorization = $('input[name="authorization"]').val();
+
+        $.ajax({
+            url: "/api/seatNumbers",
+            type: 'GET',
+            data: {
+                number: number,
+                site_id: 1
+            },
+            beforeSend: function beforeSend(xhr) {
+                xhr.setRequestHeader("Authorization", "Bearer  " + authorization);
+            },
+            success: function success(result) {
+                if (result.length) {
+                    $no_ticket.addClass('hidden');
+                    $has_ticket.removeClass('hidden');
+                    $confirm_button.attr('disabled', false);
+                    $('input[name="seat"]').val(result);
+
+                    $.each(result, function (key, val) {
+                        var $ticket = $('<span class="ticket"></span>').html(val);
+                        $has_ticket.append($ticket);
+                    });
+
+                    $confirm_button.attr('disabled', false);
+                } else {
+                    $confirm_button.attr('disabled', true);
+                }
+            },
+            error: function error() {}
+        });
+    });
 });
 
 /***/ }),

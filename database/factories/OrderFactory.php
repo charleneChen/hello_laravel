@@ -9,7 +9,9 @@ $factory->define(App\Models\Order::class, function (Faker $faker) {
 
     return [
         'user_id' => $user_id,
+        'site_id' => 1,
         'num' => $num,
+        'seat' => 'A1-10',
         'created_at' => $date_time,
         'updated_at' => $date_time,
     ];

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration
+class CreateSeatsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('seats', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->comment('用户标识，ref User.id');
             $table->integer('site_id')->comment('座位属于哪个场地，ref Site.id');
-            $table->integer('num')->comment('订了多少张票');
-            $table->string('seat')->comment('座位号');
+            $table->string('block')->comment('座位在哪个区域，例如A区');
+            $table->integer('row')->comment('座位在第几行');
+            $table->integer('col')->comment('座位在第几列');
+            $table->boolean('is_active')->comment('是否可用');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('seats');
     }
 }

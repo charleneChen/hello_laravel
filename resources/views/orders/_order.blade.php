@@ -8,13 +8,14 @@
   <span class="timestamp">
     {{ $order->created_at->diffForHumans() }}
   </span>
-  <span class="content">{{ $order->num }}</span>
+  <span class="content">票数：{{ $order->num }}</span>
+  <span class="content">座位：{{ $order->seat }}</span>
 
-  @can('destroy', $order)
-      <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
-        {{ csrf_field() }}
-        {{ method_field('DELETE') }}
-        <button type="submit" class="btn btn-sm btn-danger order-delete-btn">删除</button>
-      </form>
-  @endcan
+{{--  @can('destroy', $order)--}}
+      {{--<form action="{{ route('orders.destroy', $order->id) }}" method="POST">--}}
+{{--        {{ csrf_field() }}--}}
+{{--        {{ method_field('DELETE') }}--}}
+        {{--<button type="submit" class="btn btn-sm btn-danger order-delete-btn">删除</button>--}}
+      {{--</form>--}}
+  {{--@endcan--}}
 </li>
