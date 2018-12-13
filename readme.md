@@ -1,58 +1,68 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## 开发环境
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+1. Laravel 5.5 + Homestead
+2. Redis
+3. 需要 npm install
 
-## About Laravel
+## 项目配置好后需要初始化数据
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+1. php artisan migrate --seed // 数据库迁移、插入 Faker 测试数据
+2. php artisan seats:write 1  // 把场地座位信息写入 Redis，后面的参数代表场地 id，目前只使用测试数据 1
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 测试用户
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications.
+### 管理员
 
-## Learning Laravel
+```
+邮箱：262405614@qq.com
+密码：password
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of any modern web application framework, making it a breeze to get started learning the framework.
+```
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 1100 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+### 普通用户
 
-## Laravel Sponsors
+1. 邮箱请查阅数据库，因为使用 Faker 插入的测试数据
+2. 密码默认为 `secret`
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell):
+## 查看晚会的订票情况地址
+`/parties/1/orders`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Pulse Storm](http://www.pulsestorm.net/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
+由于时间关系，这个对应的链接地址没有放到页面上
 
-## Contributing
+## 实现的功能
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. 注册、登录
+2. 管理员角色 + 普通用户角色 + 简单的权限判断访问不同页面
+3. 随机分配座位，完成订票
+4. 查看用户的订票情况
 
-## Security Vulnerabilities
+## 待实现的功能
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+因为时间的关系，目前完成的只是一个粗略版本，下面列出还需要完善的一些功能：
 
-## License
+1. 多个用户同时订票的时候，要锁票
+2. 出错时候的一个错误页面展示，以及相应回滚机制
+3. 已选座位、可选座位的效果展示
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## 总结
+
+1. 关于随机分配座位，利用了 Redis 的 srandmemebr 等特性。实现思路：
+
+    首先，根据场地座位规则，得出每个座位的编号，存入 Mysql 和 Redis
+    
+    然后，根据请求分配座位数目，从 Redis 中 srandmemebr 出相应数目的座位
+    
+    如果确定随机分配的座位，提交了表单，就把分配出的座位从 Redis 中移除
+    
+    但是这有个问题，多个用户同时请求有可能会拿到同样的座位，所以需要完善添加锁票、回滚机制
+    
+2. 用户点击随机分配座位的时候，使用的是异步请求相应的 API 接口，使用了 `JWTAuth` 实现 API Auth ,
+   这个 access token 需要加到请求的 header 中，在表单中添加了隐藏 input 放置这个 token
+   
+3. Laravel 这个框架整体上和 Ruby on Rails 框架类似，应用起来不是很难，难点主要是这里面的使用方式和 Rails 有区别。
+    
+    比如说，request 过滤，Rails 用的是 filter
+   
+4. Laravel Mix 这个很好用，前端编译等方面省了很多事   
+        

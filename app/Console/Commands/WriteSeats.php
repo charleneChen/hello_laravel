@@ -38,16 +38,16 @@ class WriteSeats extends Command
      */
     public function handle()
     {
-        $site_id = 1;
+        $party_id = $this->argument('party_id');;
         $seats = \DB::table('seats')
             ->select('block', 'row', 'col')
-            ->where('site_id', $site_id)
+            ->where('site_id', $party_id)
             ->get();
 
         foreach ($seats as $seat) {
             $seat = (array) $seat;
             $data = $seat['block'] . '-' . $seat['row'] . '-' . $seat['col'];
-            \Redis::sadd('party_' . $site_id, $data);
+            \Redis::sadd('party_' . $party_id, $data);
         }
 
         $this->info('Success');
